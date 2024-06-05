@@ -24,11 +24,12 @@ const ApplicationDetails = () => {
   }, [axiosPublic, id]);
 
   const handleAcceptApplication = async () => {
-    navigate("/admin/dashboard");
+    
+    // navigate("/admin/dashboard");
     try {
       // await axiosPublic.get(`/deleteApplication/${id}`);
       //   Sending rejection Mail
-      axiosPublic.get("/applicationAccept");
+      axiosPublic.get(`/applicationAccept/${id}`);
       toast.success("Application Accept successfully");
       // Redirect to dashboard after deletion
       navigate("/admin/dashboard");
@@ -42,7 +43,7 @@ const ApplicationDetails = () => {
       await axiosPublic.delete(`/deleteApplication/${id}`);
       toast.success("Application deleted successfully");
     //   Sending rejection Mail
-      axiosPublic.get("/applicationReject");
+      axiosPublic.get(`/applicationReject/${id}`);
       // Redirect to dashboard after deletion
       navigate("/admin/dashboard");
     } catch (error) {
