@@ -23,6 +23,20 @@ const ApplicationDetails = () => {
     fetchApplication();
   }, [axiosPublic, id]);
 
+  const handleAcceptApplication = async () => {
+    navigate("/admin/dashboard");
+    try {
+      // await axiosPublic.get(`/deleteApplication/${id}`);
+      //   Sending rejection Mail
+      axiosPublic.get("/applicationAccept");
+      toast.success("Application Accept successfully");
+      // Redirect to dashboard after deletion
+      navigate("/admin/dashboard");
+    } catch (error) {
+      toast.error("Failed to delete application");
+      console.error("Error deleting application:", error);
+    }
+  };
   const handleDeleteApplication = async () => {
     try {
       await axiosPublic.delete(`/deleteApplication/${id}`);
@@ -41,13 +55,13 @@ const ApplicationDetails = () => {
     <div className="contentpaneopen">
     <div className="flex gap-10 justify-end pr-20 pt-10">
         <div>
-        <button >GO TO Home</button>
+        <button onClick={handleAcceptApplication}>Accept Application</button>
         </div>
         <div>
         <button >Print</button>
         </div>
         <div>
-        <button onClick={handleDeleteApplication}>Delete Now</button>
+        <button onClick={handleDeleteApplication}>Reject Application</button>
         </div>
     </div>
       <div style={{ padding: "30px 20px" }} id="printableContentDiv">
