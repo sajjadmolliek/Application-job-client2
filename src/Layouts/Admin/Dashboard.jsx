@@ -26,7 +26,7 @@ const Dashboard = () => {
     try {
       await axiosPublic.delete(`/deleteApplication/${id}`);
       setData(data.filter((item) => item._id !== id));
-      axiosPublic.get("/applicationReject");
+      axiosPublic.get(`/applicationReject/${id}`);
       toast.success("Application deleted successfully");
     } catch (error) {
       toast.error("Failed to delete application");
